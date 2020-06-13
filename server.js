@@ -3,7 +3,7 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
-const table = require("./data/tableArr");
+const tables = require("./data/tableArr");
 const waitlist = require("./data/waitlistArr");
 
 // Sets up the Express App
@@ -32,20 +32,27 @@ app.get("/tables", function (req, res) {
 app.post("/reserve", function (req, res) {
   // req.body hosts is equal to the JSON post sent from the user
   // This works because of our body parsing middleware
-  const newCharacter = req.body;
+  const newTable = req.body;
 
-  // Using a RegEx Pattern to remove spaces from newCharacter
+  // Using a RegEx Pattern to remove spaces from newTable
   // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
 
-  console.log(newCharacter);
-  //   if ((table.length = 5)) {
-  //     waitlist.push(newCharacter);
-  //   } else {
-  //     table.push(newCharacter);
-  //   }
-  table.push(newCharacter);
+  if (tables.length < 5) {
+    tables.push(newTable);
+  } else {
+    waitlist.push(newTable);
+  }
+  //   tables.push(req.body);
 
-  res.json(newCharacter);
+  res.json(newTable);
+});
+
+app.get("/api/tables", function (req, res) {
+  return res.json(tables);
+});
+
+app.get("/api/waitlist", function (req, res) {
+  return res.json(waitlist);
 });
 
 // Starts the server to begin listening
