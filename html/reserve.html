@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Jeff Fieri's Hot and Spicy Dank Shitty Kitchen - Make A Reservation</title>
+		<!-- Latest compiled and minified CSS & JS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+		<script src="https://code.jquery.com/jquery.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="jumbotron">
+				<h1 class="text-center"><span class="fa fa-fire"></span> Jeff Fieri's Hot and Spicy Dank Shitty Kitchen<span class="fa fa-fire"></span></h1>
+				<h2 class="text-center">The Worst Fucking Resturant Ever!</h2>
+				<h5 class="text-center">We only have 5 tables! Book your seat before they all are gone!</h5>
+				<hr />
+				<div class="text-center">
+					<a href="/add"
+						><button class="btn btn-primary btn-lg"><span class="fa fa-plus"></span> View Available Tables</button></a
+					>
+					<a href="/api/characters"
+						><button class="btn btn-dark btn-lg"><span class="fa fa-eye"></span> Home</button></a
+					>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header">
+							<h3><strong>Table Reservation</strong></h3>
+						</div>
+						<div class="card-body">
+							<form method="POST" role="form">
+								<div class="form-group">
+									<label for="name">Name</label>
+									<input type="text" class="form-control" id="name" />
+								</div>
+
+								<div class="form-group">
+									<label for="phone">Phone Number</label>
+									<input type="text" class="form-control" id="phone" />
+								</div>
+
+								<div class="form-group">
+									<label for="email">Email</label>
+									<input type="email" class="form-control" id="email" />
+								</div>
+
+								<div class="form-group">
+									<label for="unique-id">Unique ID</label>
+									<input type="text" class="form-control" id="unique-id" />
+								</div>
+							</form>
+							<br />
+							<div class="text-right">
+								<button type="submit" class="btn btn-primary btn-md" id="add-btn"><span class="fa fa-fire"></span> Add to the Force</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			// Question: What does this code do?
+			$('#add-btn').on('click', function (event) {
+				event.preventDefault();
+				var newCharacter = {
+					name: $('#name').val().trim(),
+					role: $('#role').val().trim(),
+					age: $('#age').val().trim(),
+					forcePoints: $('#force-points').val().trim(),
+				};
+
+				// Question: What does this code do??
+				$.post('/api/characters', newCharacter).then(function (data) {
+					console.log('add.html', data);
+					alert('Adding character...');
+				});
+			});
+		</script>
+	</body>
+</html>
