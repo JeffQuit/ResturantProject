@@ -32,20 +32,20 @@ app.get("/tables", function (req, res) {
 app.post("/reserve", function (req, res) {
   // req.body hosts is equal to the JSON post sent from the user
   // This works because of our body parsing middleware
-  const newCharacter = req.body;
+  const newTable = req.body;
 
-  // Using a RegEx Pattern to remove spaces from newCharacter
+  // Using a RegEx Pattern to remove spaces from newTable
   // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
 
-  console.log(newCharacter);
+  console.log(newTable);
   //   if ((table.length = 5)) {
-  //     waitlist.push(newCharacter);
+  //     waitlist.push(newTable);
   //   } else {
-  //     table.push(newCharacter);
+  //     table.push(newTable);
   //   }
-  table.push(newCharacter);
+  table.push(newTable);
 
-  res.json(newCharacter);
+  res.json(newTable);
 });
 
 // Starts the server to begin listening
