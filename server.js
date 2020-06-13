@@ -3,7 +3,7 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
-const table = require("./data/tableArr");
+const tables = require("./data/tableArr");
 const waitlist = require("./data/waitlistArr");
 
 // Sets up the Express App
@@ -37,15 +37,22 @@ app.post("/reserve", function (req, res) {
   // Using a RegEx Pattern to remove spaces from newTable
   // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
 
-  console.log(newTable);
-  //   if ((table.length = 5)) {
-  //     waitlist.push(newTable);
-  //   } else {
-  //     table.push(newTable);
-  //   }
-  table.push(newTable);
+  if (tables.length < 5) {
+    tables.push(newTable);
+  } else {
+    waitlist.push(newTable);
+  }
+  //   tables.push(req.body);
 
   res.json(newTable);
+});
+
+app.get("/api/tables", function (req, res) {
+  return res.json(tables);
+});
+
+app.get("/api/waitlist", function (req, res) {
+  return res.json(waitlist);
 });
 
 // Starts the server to begin listening
