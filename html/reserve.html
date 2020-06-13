@@ -18,10 +18,10 @@
 				<h5 class="text-center">We only have 5 tables! Book your seat before they all are gone!</h5>
 				<hr />
 				<div class="text-center">
-					<a href="/add"
+					<a href="/tables"
 						><button class="btn btn-primary btn-lg"><span class="fa fa-plus"></span> View Available Tables</button></a
 					>
-					<a href="/api/characters"
+					<a href="/"
 						><button class="btn btn-dark btn-lg"><span class="fa fa-eye"></span> Home</button></a
 					>
 				</div>
@@ -56,7 +56,7 @@
 							</form>
 							<br />
 							<div class="text-right">
-								<button type="submit" class="btn btn-primary btn-md" id="add-btn"><span class="fa fa-fire"></span> Add to the Force</button>
+								<button type="submit" class="btn btn-primary btn-md" id="add-btn"><span class="fa fa-fire"></span> Add Reservation</button>
 							</div>
 						</div>
 					</div>
@@ -68,17 +68,25 @@
 			// Question: What does this code do?
 			$('#add-btn').on('click', function (event) {
 				event.preventDefault();
-				var newCharacter = {
-					name: $('#name').val().trim(),
-					role: $('#role').val().trim(),
-					age: $('#age').val().trim(),
-					forcePoints: $('#force-points').val().trim(),
+				var newTableRes = {
+					tableResName: $('#name').val().trim(),
+					tablePhoneNum: $('#phone').val().trim(),
+					tableEmail: $('#email').val().trim(),
+					tableUniqueID: $('#unique-id').val().trim(),
 				};
 
+				console.log(newTableRes);
+
 				// Question: What does this code do??
-				$.post('/api/characters', newCharacter).then(function (data) {
-					console.log('add.html', data);
-					alert('Adding character...');
+				$.post('/api/tables', newTableRes).then(function (data) {
+					console.log(data);
+					alert('Adding table to reservation...');
+
+					//Clears data in input boxes
+					$('#name').val('');
+					$('#phone').val('');
+					$('#email').val('');
+					$('#unique-id').val('');
 				});
 			});
 		</script>
